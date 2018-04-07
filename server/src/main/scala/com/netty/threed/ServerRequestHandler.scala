@@ -1,23 +1,22 @@
 package com.netty.threed
 
-import io.netty.buffer.ByteBuf
-import io.netty.channel.{ChannelHandlerContext, ChannelInboundHandlerAdapter}
-import io.netty.util.ReferenceCountUtil
+import io.netty.channel.{ChannelFuture, ChannelFutureListener, ChannelHandlerContext, ChannelInboundHandlerAdapter}
 
 class ServerRequestHandler extends ChannelInboundHandlerAdapter {
 
-  override def channelRead(ctx: ChannelHandlerContext, event: scala.Any): Unit = {
-    event match {
-      case m: ByteBuf =>
-        try {
-          while (m.isReadable) {
-            println(m.readByte())
-          }
-        } finally {
-          ReferenceCountUtil.release(event)
-        }
-      case _ => println("oops")
-    }
+  override def channelActive(ctx: ChannelHandlerContext): Unit = {
+    val response = ctx.alloc().buffer(8) //64 bit int
+    response.writeLong(System.currentTimeMillis())
+
+    val channelTask = ctx.writeAndFlush(response)
+
+    channelTask.addListener(new ChannelFutureListener {
+      override def operationComplete(future: ChannelFuture): Unit = {
+        println(s"futureTask: $future")
+        ctx.close()
+      }
+    })
+
   }
 
   override def exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable): Unit = {
