@@ -2,9 +2,9 @@ netty microservice
 -----------------
 
 ```bash
+cd server
 gradle run
 ```
-
 
 ```bash
 $ curl -v localhost:9090

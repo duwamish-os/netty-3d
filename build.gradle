@@ -11,10 +11,10 @@ repositories {
     mavenCentral()
 }
 
-group = 'com.prayagupd.api'
-description = 'eccount'
+group = 'com.netty.microservice'
+description = 'netty-microservice'
 
-mainClassName = 'com'
+mainClassName = 'com.netty.microservice.NettyServer'
 
 dependencies {
 
@@ -24,6 +24,4 @@ dependencies {
 
     compile group: 'io.projectreactor.netty', name: 'reactor-netty', version: '0.9.6.RELEASE'
 
-    testCompile group: 'junit', name: 'junit', version: '4.12'
 }
-

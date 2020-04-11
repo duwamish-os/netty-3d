@@ -1,3 +1,5 @@
+package com.netty.microservice;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -24,7 +26,7 @@ public class NettyServer {
 
                     @Override
                     protected void initChannel(SocketChannel ch) {
-                        ch.pipeline().addLast(new HeartbeatHandler());
+                        ch.pipeline().addLast(new HeartbeatServerHandler());
                     }
                 })
                 .option(ChannelOption.SO_BACKLOG, 128)

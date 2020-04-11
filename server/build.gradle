@@ -6,10 +6,10 @@ repositories {
     mavenCentral()
 }
 
-group = 'com.prayagupd.api'
-description = 'eccount'
+group = 'com.netty.microservice'
+description = 'netty-microservice-server'
 
-mainClassName = 'NettyServer'
+mainClassName = 'com.netty.microservice.NettyServer'
 
 dependencies {
 
