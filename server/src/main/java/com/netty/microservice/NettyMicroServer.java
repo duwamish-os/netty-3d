@@ -14,7 +14,7 @@ import io.netty.handler.ssl.util.SelfSignedCertificate;
 import javax.net.ssl.SSLException;
 import java.security.cert.CertificateException;
 
-public class NettyServer {
+public class NettyMicroServer {
 
     private static final boolean SSL = System.getProperty("ssl") != null;
 
@@ -56,6 +56,6 @@ public class NettyServer {
     }
 
     public static void main(String[] args) throws InterruptedException, CertificateException, SSLException {
-        new NettyServer().run();
+        new NettyMicroServer().run();
     }
 }

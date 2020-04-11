@@ -17,34 +17,34 @@ $ curl -v localhost:9090
 > Accept: */*
 > 
 < HTTP/1.1 200 OK
-< content-type: text/plain
-< content-length: 37
+< content-type: application/json
+< content-length: 67
 < 
 * Connection #0 to host localhost left intact
-{"serviceName": "netty-microservice"}* Closing connection 0
+{"applicationName":"netty-microservice","applicationVersion":"1.0"}* Closing connection 0
 ```
 
 perf
 ----
 
 ```bash
-ab -n 10000 -c 100 -k http://localhost:9090/
+ab -n 25000 -c 100 -k http://localhost:9090/
 This is ApacheBench, Version 2.3 <$Revision: 1843412 $>
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
 
 Benchmarking localhost (be patient)
-Completed 1000 requests
-Completed 2000 requests
-Completed 3000 requests
-Completed 4000 requests
+Completed 2500 requests
 Completed 5000 requests
-Completed 6000 requests
-Completed 7000 requests
-Completed 8000 requests
-Completed 9000 requests
+Completed 7500 requests
 Completed 10000 requests
-Finished 10000 requests
+Completed 12500 requests
+Completed 15000 requests
+Completed 17500 requests
+Completed 20000 requests
+Completed 22500 requests
+Completed 25000 requests
+Finished 25000 requests
 
 
 Server Software:        
@@ -52,40 +52,40 @@ Server Hostname:        localhost
 Server Port:            9090
 
 Document Path:          /
-Document Length:        0 bytes
+Document Length:        67 bytes
 
 Concurrency Level:      100
-Time taken for tests:   2.312 seconds
-Complete requests:      10000
+Time taken for tests:   0.320 seconds
+Complete requests:      25000
 Failed requests:        0
-Keep-Alive requests:    0
-Total transferred:      0 bytes
-HTML transferred:       0 bytes
-Requests per second:    4326.08 [#/sec] (mean)
-Time per request:       23.116 [ms] (mean)
-Time per request:       0.231 [ms] (mean, across all concurrent requests)
-Transfer rate:          0.00 [Kbytes/sec] received
+Keep-Alive requests:    25000
+Total transferred:      4050000 bytes
+HTML transferred:       1675000 bytes
+Requests per second:    78120.36 [#/sec] (mean)
+Time per request:       1.280 [ms] (mean)
+Time per request:       0.013 [ms] (mean, across all concurrent requests)
+Transfer rate:          12358.89 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.0      0       4
-Processing:     0    0   5.3      0     527
-Waiting:        0    0   0.0      0       0
-Total:          0    0   5.3      0     527
+Connect:        0    0   0.2      0       4
+Processing:     0    1   0.5      1       9
+Waiting:        0    1   0.5      1       9
+Total:          0    1   0.6      1       9
 
 Percentage of the requests served within a certain time (ms)
-  50%      0
-  66%      0
-  75%      0
-  80%      0
-  90%      0
-  95%      0
-  98%      0
-  99%      0
- 100%    527 (longest request)
+  50%      1
+  66%      1
+  75%      1
+  80%      1
+  90%      2
+  95%      2
+  98%      2
+  99%      3
+ 100%      9 (longest request)
  ```
  
-![](netty_perf_2020.png)
+![](netty_http_perf_2020.png)
 
 Also see
 -----
