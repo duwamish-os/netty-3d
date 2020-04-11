@@ -16,11 +16,12 @@ $ curl -v localhost:9090
 > User-Agent: curl/7.64.1
 > Accept: */*
 > 
-Warning: Binary output can mess up your terminal. Use "--output -" to tell 
-Warning: curl to output it to your terminal anyway, or consider "--output 
-Warning: <FILE>" to save to a file.
-* Failed writing body (0 != 8)
-* Closing connection 0
+< HTTP/1.1 200 OK
+< content-type: text/plain
+< content-length: 37
+< 
+* Connection #0 to host localhost left intact
+{"serviceName": "netty-microservice"}* Closing connection 0
 ```
 
 perf
