@@ -6,6 +6,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 public class ServerRequestHandler extends ChannelInboundHandlerAdapter {
 
     public void channelActive(ChannelHandlerContext ctx) {
+        System.out.println("ChannelHandlerContext: " + ctx);
         var response = ctx.alloc().buffer(8); //64 bit int
         response.writeLong(System.currentTimeMillis());
 

@@ -8,7 +8,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 public class NettyServer {
 
-    public ChannelFuture run() throws InterruptedException {
+    private ChannelFuture run() throws InterruptedException {
         //a multithreaded event loop that handles I/O operation
         var bossGroup = new NioEventLoopGroup();
 
@@ -17,22 +17,22 @@ public class NettyServer {
 
         //NioServerSocketChannel used to instantiate a new Channel
         // to accept incoming connections
-        var b = new ServerBootstrap();
-        b.group(bossGroup, workerGroup)
+        var server = new ServerBootstrap();
+        server.group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
                 .childHandler(new ChannelInitializer<SocketChannel>() {
 
                     @Override
                     protected void initChannel(SocketChannel ch) {
-                        ch.pipeline().addLast(new ServerRequestHandler());
+                        ch.pipeline().addLast(new HeartbeatHandler());
                     }
                 })
                 .option(ChannelOption.SO_BACKLOG, 128)
                 .childOption(ChannelOption.SO_KEEPALIVE, true);
 
-        var f = b.bind(9090).sync();
+        var serverTask = server.bind(9090).sync();
 
-        return f.channel().closeFuture().sync();
+        return serverTask.channel().closeFuture().sync();
     }
 
     public static void main(String[] args) throws InterruptedException {

@@ -1,12 +1,12 @@
 netty microservice
 -----------------
 
-```
-sbt run
+```bash
+gradle run
 ```
 
 
-```
+```bash
 $ curl -v localhost:9090
 *   Trying ::1...
 * TCP_NODELAY set
