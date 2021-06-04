@@ -1,0 +1,24 @@
+{
+  "configuration": {
+    "name": "app_logging",
+    "appenders": {
+      "RollingFile": {
+        "name": "rollingStone",
+        "fileName": "logs/netty-ms.log",
+        "filePattern": "logs/netty-ms_rolled-%d{MM-dd-yy-HH}-%i.log.gz",
+        "immediateFlush": false,
+        "SizeBasedTriggeringPolicy": {
+          "size": "1 MB"
+        }
+      }
+    },
+    "loggers": {
+      "root": {
+        "level": "debug",
+        "appender-ref": {
+          "ref": "rollingStone"
+        }
+      }
+    }
+  }
+}

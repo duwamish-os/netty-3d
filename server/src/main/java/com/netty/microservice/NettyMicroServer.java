@@ -30,15 +30,16 @@ public class NettyMicroServer {
         }
 
         //a multithreaded event loop that handles I/O operation
-        var bossGroup = new NioEventLoopGroup();
+        var bossGroupEventLoop = new NioEventLoopGroup();
 
         //accepts an incoming connection
-        var workerGroup = new NioEventLoopGroup();
+        var workerGroupForHttpConnections = new NioEventLoopGroup();
 
-        //NioServerSocketChannel used to instantiate a new Channel
+        // NioServerSocketChannel used to instantiate a new Channel
         // to accept incoming connections
         var server = new ServerBootstrap();
-        server.group(bossGroup, workerGroup)
+
+        server.group(bossGroupEventLoop, workerGroupForHttpConnections)
                 .channel(NioServerSocketChannel.class)
                 .childHandler(new ChannelInitializer<SocketChannel>() {
 

@@ -1,10 +1,26 @@
 netty microservice
 -----------------
 
+- uses `netty 4.1`
+- https://livebook.manning.com/book/netty-in-action/chapter-1/57
+- Non-blocking network calls free us from having to "wait for the completion" of an operation. 
+  Fully async I/O builds on this feature and carries it a step further: an async method returns immediately and 
+  notifies the user when it is complete, directly or at a later time.
+- `Selectors` allow us to monitor many connections for events with many fewer threads.
+
+
 ```bash
 cd server
 gradle run
 ```
+
+architecture
+------------
+
+```bash
+NettyMicroServer#run ------> HttpServerChannel#initChannel ---> HeartbeatServerHandler#channelRead0
+```
+
 
 ```bash
 $ curl -v localhost:9090
@@ -21,13 +37,16 @@ $ curl -v localhost:9090
 < content-length: 67
 < 
 * Connection #0 to host localhost left intact
-{"applicationName":"netty-microservice","applicationVersion":"1.0"}* Closing connection 0
+{"applicationName":"netty-microservice","applicationVersion":"1.0"}
+* Closing connection 0
 ```
 
 perf
 ----
 
 ```bash
+## lower concurrent requests results higher throughput
+## with 100 concurrent requests
 ab -n 25000 -c 100 -k http://localhost:9090/
 This is ApacheBench, Version 2.3 <$Revision: 1843412 $>
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/

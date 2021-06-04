@@ -47,7 +47,7 @@ public class HeartbeatServerHandler extends SimpleChannelInboundHandler<HttpObje
                         OK,
                         Unpooled.wrappedBuffer(responseBytes)
                 );
-                System.out.println("responding response: ");
+//                System.out.println("responding response: ");
 //                System.out.println("responding response: " + new String(responseBytes));
             } catch (JsonProcessingException e) {
 

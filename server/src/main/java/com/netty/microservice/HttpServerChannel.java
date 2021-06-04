@@ -17,13 +17,13 @@ public class HttpServerChannel extends ChannelInitializer<SocketChannel> {
     }
 
     @Override
-    public void initChannel(SocketChannel ch) {
-        ChannelPipeline p = ch.pipeline();
+    public void initChannel(SocketChannel socketChannel) {
+        ChannelPipeline pipeline = socketChannel.pipeline();
         if (sslCtx != null) {
-            p.addLast(sslCtx.newHandler(ch.alloc()));
+            pipeline.addLast(sslCtx.newHandler(socketChannel.alloc()));
         }
-        p.addLast(new HttpServerCodec());
-        p.addLast(new HttpServerExpectContinueHandler());
-        p.addLast(new HeartbeatServerHandler());
+        pipeline.addLast(new HttpServerCodec());
+        pipeline.addLast(new HttpServerExpectContinueHandler());
+        pipeline.addLast(new HeartbeatServerHandler());
     }
 }
