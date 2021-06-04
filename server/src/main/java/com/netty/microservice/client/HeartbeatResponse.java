@@ -1,4 +1,4 @@
-package com.netty.microservice.handlers;
+package com.netty.microservice.client;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

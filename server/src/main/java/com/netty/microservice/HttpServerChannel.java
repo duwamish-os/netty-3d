@@ -1,6 +1,7 @@
 package com.netty.microservice;
 
-import com.netty.microservice.handlers.HeartbeatServerHandler;
+import com.netty.microservice.handlers.HeartbeatServerJsonHandler;
+import com.netty.microservice.handlers.HelloServerHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -24,6 +25,7 @@ public class HttpServerChannel extends ChannelInitializer<SocketChannel> {
         }
         pipeline.addLast(new HttpServerCodec());
         pipeline.addLast(new HttpServerExpectContinueHandler());
-        pipeline.addLast(new HeartbeatServerHandler());
+        pipeline.addLast(new HelloServerHandler());
+//        pipeline.addLast(new HeartbeatServerJsonHandler());
     }
 }

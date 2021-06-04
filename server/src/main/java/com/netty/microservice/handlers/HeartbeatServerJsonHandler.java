@@ -2,6 +2,7 @@ package com.netty.microservice.handlers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.netty.microservice.client.HeartbeatResponse;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -20,7 +21,7 @@ import static io.netty.handler.codec.http.HttpHeaderValues.*;
 import static io.netty.handler.codec.http.HttpResponseStatus.INTERNAL_SERVER_ERROR;
 import static io.netty.handler.codec.http.HttpResponseStatus.OK;
 
-public class HeartbeatServerHandler extends SimpleChannelInboundHandler<HttpObject> {
+public class HeartbeatServerJsonHandler extends SimpleChannelInboundHandler<HttpObject> {
 
     private static final ObjectMapper encoder = new ObjectMapper();
 
