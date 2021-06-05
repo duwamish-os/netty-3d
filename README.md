@@ -37,7 +37,7 @@ $ curl -v localhost:9090
 < content-length: 67
 < 
 * Connection #0 to host localhost left intact
-{"applicationName":"netty-microservice","applicationVersion":"1.0"}
+{"applicationName":"netty-netty-netty-netty-netty-netty-netty","applicationVersion":"1.0"}
 * Closing connection 0
 ```
 
@@ -111,3 +111,5 @@ Also see
 
 - https://github.com/prayagupd/eccount-rest-nio
 - https://github.com/prayagupd/eccount-rest
+- https://engineering.fb.com/2014/11/05/production-engineering/introducing-proxygen-facebook-s-c-http-framework/
+- https://talawah.io/blog/extreme-http-performance-tuning-one-point-two-million/

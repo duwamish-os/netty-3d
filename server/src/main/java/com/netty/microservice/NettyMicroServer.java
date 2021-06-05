@@ -10,6 +10,8 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
+import io.netty.util.NettyRuntime;
+import io.netty.util.internal.SystemPropertyUtil;
 
 import javax.net.ssl.SSLException;
 import java.security.cert.CertificateException;
@@ -29,8 +31,25 @@ public class NettyMicroServer {
             sslCtx = null;
         }
 
+        /**
+         * with NettyRuntime.availableProcessors() * 2 = 24
+         * Percentage of the requests served within a certain time (ms)
+         *   50%      0
+         *   66%      0
+         *   75%      0
+         *   80%      0
+         *   90%      0
+         *   95%      0
+         *   98%      0
+         *   99%      0
+         *  100%     33 (longest request)
+         */
+        var cores = NettyRuntime.availableProcessors();
+        int ioThreads1 = SystemPropertyUtil.getInt("io.netty.eventLoopThreads", cores * 2);
+
+
         //a multithreaded event loop that handles I/O operation
-        var bossGroupEventLoop = new NioEventLoopGroup();
+        var bossGroupEventLoop = new NioEventLoopGroup(ioThreads1);
 
         //accepts an incoming connection
         var workerGroupForHttpConnections = new NioEventLoopGroup();
